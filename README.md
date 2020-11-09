@@ -5,5 +5,5 @@ A real quick workaround to get around the docker rate limits in our labs until w
 Run this on the control plane node.
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/kodekloudhub/docker-rate-limit-workaround/blob/main/workaround.sh)
+bash <(curl -s https://raw.githubusercontent.com/kodekloudhub/docker-rate-limit-workaround/main/workaround.sh)
 ```
