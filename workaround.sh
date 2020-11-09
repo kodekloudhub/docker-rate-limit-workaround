@@ -11,7 +11,7 @@ EOF
 done
 
 #Apply on ControlPlane
-if [ -e /etc/docker/daemon.json]
+if [ /etc/docker/daemon.json ]
 then
 echo "Adding registry mirror on ControlPlane"
 systemctl stop docker
