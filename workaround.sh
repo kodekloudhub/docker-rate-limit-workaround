@@ -5,10 +5,13 @@ systemctl stop docker
 sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json
 systemctl start docker
 
-#Apply on node01
+#Apply on nodees
 echo "Adding registry mirror on Node01"
-ssh -o strictHostKeyChecking=no node01 << EOF
+for j in `kubectl get nodes --no-headers| awk '{print $1}' | grep ^node`
+do
+ssh -o strictHostKeyChecking=no $j << EOF
 systemctl stop docker ; 
 sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json ; 
 systemctl start docker
 EOF
+done
