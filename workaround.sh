@@ -21,5 +21,5 @@ done
 
 echo "Wait for Docker Service to be Ready"
 until kubectl get pods -n kube-system 2>/dev/null | grep  '0/' | wc -l | grep -qw 0 2> /dev/null; do  echo -n  .;sleep 1s; done
-fi
+#fi
 
