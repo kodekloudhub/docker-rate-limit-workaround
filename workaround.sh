@@ -1,6 +1,6 @@
 #!/bin/bash
 echo " "
-Apply on nodes
+#Apply on nodes
 for j in `kubectl get nodes --no-headers| awk '{print $1}' | grep ^node`
 do
 echo "Adding registry mirror on $j"
@@ -11,7 +11,7 @@ systemctl start docker
 EOF
 done
 
-Apply on ControlPlane
+#Apply on ControlPlane
 if [ /etc/docker/daemon.json ]
 then
 echo "Adding registry mirror on ControlPlane"
