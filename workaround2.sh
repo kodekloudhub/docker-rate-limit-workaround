@@ -1,6 +1,6 @@
 #!/bin/bash
 echo
-Apply on nodes
+#Apply on nodes
 echo "Adding registry mirror on node01"
 ssh -q -o strictHostKeyChecking=no node01 << EOF
 systemctl stop docker ; 
@@ -9,7 +9,7 @@ systemctl start docker
 EOF
 
 
-Apply on ControlPlane
+#Apply on ControlPlane
 if [ /etc/docker/daemon.json ]
 then
 echo "Adding registry mirror on ControlPlane"
