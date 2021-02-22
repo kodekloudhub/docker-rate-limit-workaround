@@ -5,9 +5,10 @@ for j in `kubectl get nodes --no-headers| awk '{print $1}' | grep ^node`
 do
 echo "Adding registry mirror on $j"
 ssh -q -o strictHostKeyChecking=no $j << EOF
-systemctl stop docker ; 
-sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json ; 
-systemctl start docker
+#systemctl stop docker ; 
+#sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json ; 
+sed -i 's@http://docker-registry-mirror.katacoda.com@https://mirror.gcr.io@g' /etc/docker/daemon.json
+systemctl restart docker
 EOF
 done
 
@@ -15,8 +16,9 @@ done
 if [ /etc/docker/daemon.json ]
 then
 echo "Adding registry mirror on ControlPlane"
-systemctl stop docker
-sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json
+#systemctl stop docker
+#sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json
+sed -i 's@http://docker-registry-mirror.katacoda.com@https://mirror.gcr.io@g' /etc/docker/daemon.json
 systemctl start docker
 sleep 5
 echo "Wait for Docker Service to be Ready"
