@@ -1,13 +1,5 @@
 #!/bin/bash
 echo " "
-#Download Flannel Image from tarball
-curl -s https://storage.googleapis.com/pub-images/flannel.tar -o /tmp/flannel.tar > /dev/null
-#Removed Cached Image if Any
-docker image rm 4e9f801d2217 > /dev/null
-#Load from Tarball
-docker load < /tmp/flannel.tar > /dev/null
-scp /tmp/flannel.tar node01:/tmp > /dev/null
-ssh node01 "docker image rm 4e9f801d2217 > /dev/null; docker load < /tmp/flannel.tar > /dev/null"
 #Apply on nodes
 for j in $(kubectl get nodes --no-headers | awk '{print $1}' | grep ^node); do
     echo "Adding registry mirror on $j"
