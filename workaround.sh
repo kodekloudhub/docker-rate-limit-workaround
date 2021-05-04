@@ -1,5 +1,5 @@
 #!/bin/bash
-#echo " "
+echo " "
 #Apply on nodes
 for j in $(kubectl get nodes --no-headers | awk '{print $1}' | grep ^node); do
     echo "Adding registry mirror on $j"
