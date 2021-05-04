@@ -14,7 +14,7 @@ for j in $(kubectl get nodes --no-headers | awk '{print $1}' | grep ^node); do
 EOF
 done
 
-sleep 2
+sleep 5
 until kubectl get pods -n kube-system 2>/dev/null | egrep 'master|controlplane|weave|flannel' | grep '0/' | wc -l | grep -qw 0 2>/dev/null; do
     echo -n .
     sleep 1s
