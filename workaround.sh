@@ -9,7 +9,7 @@ for j in $(kubectl get nodes --no-headers | awk '{print $1}' | grep ^node); do
       then 
         sed -i 's@http://docker-registry-mirror.katacoda.com@http://docker-registry-mirror.kodekloud.com@g' /etc/docker/daemon.json;
       else
-        sed -i '2i \    "registry-mirrors\": [\"http://ocker-registry-mirror.kodekloud.com\"],' /etc/docker/daemon.json ; 
+        sed -i '2i \    "registry-mirrors\": [\"http://docker-registry-mirror.kodekloud.com\"],' /etc/docker/daemon.json ; 
       fi
       systemctl restart docker
 EOF
