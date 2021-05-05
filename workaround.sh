@@ -4,11 +4,12 @@ echo " "
 for j in $(kubectl get nodes --no-headers | awk '{print $1}' | grep ^node); do
     echo "Adding registry mirror on $j"
     ssh -q -o strictHostKeyChecking=no $j <<EOF
+      echo '34.123.121.58 docker-registry-mirror.kodekloud.com' >> /etc/hosts
       if grep registry-mirrors /etc/docker/daemon.json | grep -q docker-registry-mirror.katacoda.com ; 
       then 
-        sed -i 's@http://docker-registry-mirror.katacoda.com@https://mirror.gcr.io@g' /etc/docker/daemon.json;
+        sed -i 's@http://docker-registry-mirror.katacoda.com@http://docker-registry-mirror.kodekloud.com@g' /etc/docker/daemon.json;
       else
-        sed -i '2i \    "registry-mirrors\": [\"https://mirror.gcr.io\"],' /etc/docker/daemon.json ; 
+        sed -i '2i \    "registry-mirrors\": [\"http://ocker-registry-mirror.kodekloud.com\"],' /etc/docker/daemon.json ; 
       fi
       systemctl restart docker
 EOF
